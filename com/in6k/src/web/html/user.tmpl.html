@@ -1,3 +1,17 @@
 <div ng-init="init()">
-    <input type="text"> <button class="btn btn-primary">Create</button>
+    <div>
+        <div class="">
+            Add a new user
+        </div>
+    </div>
+    <span ng-repeat="user in users">
+        <div class="pull-left text-center alert alert-info" style="margin: 0px 10px; width: 150px;">
+            <div class="text-right">
+                <a class="fa fa-2x fa-remove" ng-click="removeUser()"></a>
+                <a class="fa fa-2x fa-edit" ng-click="editUser()"></a>
+            </div>
+            <div class="fa fa-5x fa-user"></div>
+            <div>{{user.name}}</div>
+        </div>
+    </span>
 </div>

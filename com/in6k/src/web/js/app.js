@@ -7,7 +7,7 @@ App.config(function($routeProvider) {
     });
     $routeProvider.when('/users', {
         controller: 'UserCtrl',
-        templateUrl: 'html/users.tmpl.html'
+        templateUrl: 'html/user.tmpl.html'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
 });
