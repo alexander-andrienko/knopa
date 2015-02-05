@@ -20,7 +20,9 @@ App.controller('activityCtrl', function($scope, $route, activityService) {
         }
     };
 
-    $scope.addContainer = function() {};
+    $scope.remove = function(parent, child) {
+        parent.children = parent.children.filter(function(el) { return el == child });
+    };
 
     $scope.addStep = function(container) {
         if (!container.newStep || container.newStep.length <= 0)

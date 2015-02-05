@@ -12,19 +12,22 @@
                     <div>
                         <span>{{child.name}}</span>
                         <input type="text" ng-model="child.newStep" ng-if="isCreate" class=""><i ng-click="addStep(child)" class="fa fa-plus" ng-if="isCreate"></i>
+                        <i class="fa fa-times" ng-click="remove(activity.container, child)"></i>
                     </div>
                 </div>
-                <div style="min-height: 200px; border: medium solid #000000">
+                <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
                     <div ng-repeat="gchild in child.children">
                         <div>
                             <div>
                                 <span>{{gchild.name}}</span>
-                                <input type="text" ng-model="gchild.newStep" ng-if="isCreate" class=""><i ng-click="addStep(gchild)" class="fa fa-plus" ng-if="isCreate"></i>
+                                <i class="fa fa-times" ng-click="remove(child, gchild)"></i>
                             </div>
                         </div>
-                        <div ng-repeat="user in gchild.children">
-                            <div>
-                                <span>{{user.name}}</span>
+                        <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
+                            <div ng-repeat="user in gchild.children">
+                                <div>
+                                    <span>{{user.name}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
