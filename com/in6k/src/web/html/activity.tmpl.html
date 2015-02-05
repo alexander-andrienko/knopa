@@ -1,0 +1,20 @@
+<div class="row panel" ng-init="init()">
+    <div class="panel-body">
+        <div class="row col-md-12">
+            <input type="text" ng-model="activity.name" ng-if="isCreate">
+
+        </div>
+        <div class="row col-md-1">
+            <i ng-click="addContainer()" class="fa fa-plus " ng-if="isCreate" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal"></i>
+        </div>
+        <div class="row col-md-12">
+            <div ng-repeat="child in activity.children">
+                <div>
+                    <div>
+                        <span>{{child.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
