@@ -6,6 +6,12 @@ App.controller('homeCtrl', function($scope, activityService, $location) {
 });
 
 App.controller('activityCtrl', function($scope, $route, activityService) {
+    $scope.editMode = {
+        steps: false,
+        users: false
+    };
+
+
     $scope.init = function() {
         if (!$route.current.params.id) {
             $scope.isCreate = true;
@@ -34,4 +40,14 @@ App.controller('activityCtrl', function($scope, $route, activityService) {
         var step = {name: container.newStep, children: []};
         container.children.push(step);
     };
+
+    $scope.defineSteps = function(activity) {
+        $scope.editMode.steps = !$scope.editMode.steps;
+        $scope.editMode.users = false;
+    }
+
+    $scope.assignUsers = function(activity) {
+        $scope.editMode.steps = false;
+        $scope.editMode.users = !$scope.editMode.users;
+    }
 });

@@ -1,42 +1,75 @@
-<style>
+<style type="text/css">
     .selected {
         background-color: green;
     }
 </style>
-<div class="row panel" ng-init="init()">
-    <div class="panel-body">
-        <div class="row col-md-12">
-            Activity Name<input type="text" ng-model="activity.name" ng-if="isCreate">
-        </div>
-        <div class="row col-md-12">
-            <input type="text" ng-model="activity.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
-        </div>
-        <div class="row col-md-12">
-            <div ng-repeat="child in activity.children" ng-click="selectActivity(child); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
-                <div>
-                    <div>
-                        <span>{{child.name}}</span>
-                        <input type="text" ng-model="child.newStep" ng-if="isCreate" class=""><i ng-click="addStep(child)" class="fa fa-plus" ng-if="isCreate"></i>
-                        <i class="fa fa-times" ng-click="remove(activity, child)"></i>
-                    </div>
-                </div>
-                <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
-                    <div ng-repeat="gchild in child.children" ng-click="selectActivity(gchild); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
-                        <div>
-                            <div>
-                                <span>{{gchild.name}}</span>
-                                <i class="fa fa-times" ng-click="remove(child, gchild)"></i>
-                            </div>
+<div class="row">
+
+
+    <div class="col-md-12">
+        <div class="panel panel-default" ng-init="init()">
+            <div class="panel-heading">
+                <span style="padding-right: 10px">
+                    <a class="fa fa-th-list" ng-click="defineSteps(activity)" ng-class="{'text-danger': editMode.steps}"></a>
+                    <a class="fa fa-users" ng-click="assignUsers(activity)"></a>
+                </span>
+                Activity: <input type="text" ng-model="activity.name" ng-if="isCreate" style="min-width: 500px">
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4" ng-if="editMode.users">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Users:</div>
+                            <div class="panel-body"></div>
                         </div>
-                        <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
-                            <div ng-repeat="user in gchild.children">
+                    </div>
+
+                    <div class="col-md-4" ng-if="editMode.steps">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Activity Steps: <a class="fa fa-plus-circle pull-right"> Add step</a></div>
+                            <div class="panel-body"></div>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-{{editMode.users || editMode.steps ? 8 : 12}}">
+                        <div ng-repeat="child in activity.children" ng-click="selectActivity(child); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
+                            <div>
                                 <div>
-                                    <span>{{user.name}}</span>
+                                    <span>{{child.name}}</span>
+                                    <input type="text" ng-model="child.newStep" ng-if="isCreate" class=""><i ng-click="addStep(child)" class="fa fa-plus" ng-if="isCreate"></i>
+                                    <i class="fa fa-times" ng-click="remove(activity, child)"></i>
+                                </div>
+                            </div>
+                            <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
+                                <div ng-repeat="gchild in child.children" ng-click="selectActivity(gchild); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
+                                    <div>
+                                        <div>
+                                            <span>{{gchild.name}}</span>
+                                            <i class="fa fa-times" ng-click="remove(child, gchild)"></i>
+                                        </div>
+                                    </div>
+                                    <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
+                                        <div ng-repeat="user in gchild.children">
+                                            <div>
+                                                <span>{{user.name}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
+
+
+
+
+                <!--<div class="row col-md-12">
+                    <input type="text" ng-model="activity.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
+                </div>-->
+
             </div>
         </div>
     </div>
