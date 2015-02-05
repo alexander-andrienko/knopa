@@ -10,18 +10,21 @@ App.controller('activityCtrl', function($scope, $route, activityService) {
         if (!$route.current.params.id) {
             $scope.isCreate = true;
             $scope.activity = {
-                container: {
-                    children: []
-                }
+                children: []
             }
         }
         else {
             $scope.activity = activityService.getActivity($route.current.params.id);
+
         }
     };
 
     $scope.remove = function(parent, child) {
         parent.children = parent.children.filter(function(el) { return el == child });
+    };
+
+    $scope.selectActivity = function(activity) {
+        $scope.activity.selectedActivity = activity;
     };
 
     $scope.addStep = function(container) {

@@ -1,3 +1,8 @@
+<style>
+    .selected {
+        background-color: green;
+    }
+</style>
 <div class="row panel" ng-init="init()">
     <div class="panel-body">
         <div class="row col-md-12">
@@ -7,7 +12,7 @@
             <input type="text" ng-model="activity.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
         </div>
         <div class="row col-md-12">
-            <div ng-repeat="child in activity.children">
+            <div ng-repeat="child in activity.children" ng-click="selectActivity(child); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
                 <div>
                     <div>
                         <span>{{child.name}}</span>
@@ -16,7 +21,7 @@
                     </div>
                 </div>
                 <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
-                    <div ng-repeat="gchild in child.children">
+                    <div ng-repeat="gchild in child.children" ng-click="selectActivity(gchild); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
                         <div>
                             <div>
                                 <span>{{gchild.name}}</span>
