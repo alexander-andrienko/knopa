@@ -1,17 +1,32 @@
 <div class="row panel" ng-init="init()">
     <div class="panel-body">
         <div class="row col-md-12">
-            <input type="text" ng-model="activity.name" ng-if="isCreate">
-
-        </div>
-        <div class="row col-md-1">
-            <i ng-click="addContainer()" class="fa fa-plus " ng-if="isCreate" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal"></i>
+            Activity Name<input type="text" ng-model="activity.name" ng-if="isCreate">
         </div>
         <div class="row col-md-12">
-            <div ng-repeat="child in activity.children">
+            <input type="text" ng-model="activity.container.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity.container)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
+        </div>
+        <div class="row col-md-12">
+            <div ng-repeat="child in activity.container.children">
                 <div>
                     <div>
                         <span>{{child.name}}</span>
+                        <input type="text" ng-model="child.newStep" ng-if="isCreate" class=""><i ng-click="addStep(child)" class="fa fa-plus" ng-if="isCreate"></i>
+                    </div>
+                </div>
+                <div style="min-height: 200px; border: medium solid #000000">
+                    <div ng-repeat="gchild in child.children">
+                        <div>
+                            <div>
+                                <span>{{gchild.name}}</span>
+                                <input type="text" ng-model="gchild.newStep" ng-if="isCreate" class=""><i ng-click="addStep(gchild)" class="fa fa-plus" ng-if="isCreate"></i>
+                            </div>
+                        </div>
+                        <div ng-repeat="user in gchild.children">
+                            <div>
+                                <span>{{user.name}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
