@@ -27,56 +27,54 @@ App.factory('activityService', function($http) {
     var _getActivity = function(id) {
         return {
             name: 'Belka',
-            container: {
-                name: '',
-                status: 'inprogress',
-                children: [
-                    {
-                        name: 'blue room',
-                        children: [
-                            {
-                                name: 'Mykolay',
-                                isComplete: true
-                            },
-                            {
-                                name: 'Alexey',
-                                isComplete: true
-                            },
-                            {
-                                name: 'Alexandr',
-                                isComplete: true
-                            },
-                            {
-                                name: 'Oleksandr',
-                                isComplete: true
-                            }
-                        ],
-                        status: 'complete'
-                    },
-                    {
-                        name: 'yellow room',
-                        children: [
-                            {
-                                name: 'Mykolay',
-                                isComplete: true
-                            },
-                            {
-                                name: 'Alexey',
-                                isComplete: true
-                            },
-                            {
-                                name: 'Alexandr',
-                                isComplete: false
-                            },
-                            {
-                                name: 'Oleksandr',
-                                isComplete: false
-                            }
-                        ],
-                        status: 'inprogress'
-                    }
-                ]
-            }
+            status: 'inprogress',
+            children: [
+                {
+                    name: 'blue room',
+                    children: [
+                        {
+                            name: 'Mykolay',
+                            isComplete: true
+                        },
+                        {
+                            name: 'Alexey',
+                            isComplete: true
+                        },
+                        {
+                            name: 'Alexandr',
+                            isComplete: true
+                        },
+                        {
+                            name: 'Oleksandr',
+                            isComplete: true
+                        }
+                    ],
+                    status: 'complete'
+                },
+                {
+                    name: 'yellow room',
+                    children: [
+                        {
+                            name: 'Mykolay',
+                            isComplete: true
+                        },
+                        {
+                            name: 'Alexey',
+                            isComplete: true
+                        },
+                        {
+                            name: 'Alexandr',
+                            isComplete: false
+                        },
+                        {
+                            name: 'Oleksandr',
+                            isComplete: false
+                        }
+                    ],
+                    status: 'inprogress'
+                }
+            ]
+
         }
     };
     return {

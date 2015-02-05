@@ -4,15 +4,15 @@
             Activity Name<input type="text" ng-model="activity.name" ng-if="isCreate">
         </div>
         <div class="row col-md-12">
-            <input type="text" ng-model="activity.container.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity.container)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
+            <input type="text" ng-model="activity.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
         </div>
         <div class="row col-md-12">
-            <div ng-repeat="child in activity.container.children">
+            <div ng-repeat="child in activity.children">
                 <div>
                     <div>
                         <span>{{child.name}}</span>
                         <input type="text" ng-model="child.newStep" ng-if="isCreate" class=""><i ng-click="addStep(child)" class="fa fa-plus" ng-if="isCreate"></i>
-                        <i class="fa fa-times" ng-click="remove(activity.container, child)"></i>
+                        <i class="fa fa-times" ng-click="remove(activity, child)"></i>
                     </div>
                 </div>
                 <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
