@@ -5,7 +5,7 @@ App.controller('homeCtrl', function($scope, activityService, $location) {
 
 });
 
-App.controller('activityCtrl', function($scope, $route, activityService) {
+App.controller('activityCtrl', function($scope, $route, activityService, UserFactory) {
     $scope.editMode = {
         steps: false,
         users: false
@@ -13,6 +13,7 @@ App.controller('activityCtrl', function($scope, $route, activityService) {
 
 
     $scope.init = function() {
+        $scope.users = UserFactory.list;
         if (!$route.current.params.id) {
             $scope.isCreate = true;
             $scope.activity = {
@@ -33,10 +34,10 @@ App.controller('activityCtrl', function($scope, $route, activityService) {
         $scope.activity.selectedActivity = activity;
     };
 
-    $scope.addStep = function(container) {
-        if (!container.newStep || container.newStep.length <= 0)
+    $scope.addSubActivity = function(container) {
+        /*if (!container.newStep || container.newStep.length <= 0)
             return;
-
+*/
         var step = {name: container.newStep, children: []};
         container.children.push(step);
     };

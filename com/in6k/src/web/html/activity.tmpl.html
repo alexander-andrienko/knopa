@@ -3,15 +3,16 @@
         background-color: green;
     }
 </style>
-<div class="row">
+<div class="row" ng-controller="activityCtrl">
 
 
     <div class="col-md-12">
         <div class="panel panel-default" ng-init="init()">
             <div class="panel-heading">
                 <span style="padding-right: 10px">
-                    <a class="fa fa-th-list" ng-click="defineSteps(activity)" ng-class="{'text-danger': editMode.steps}"></a>
-                    <a class="fa fa-users" ng-click="assignUsers(activity)"></a>
+                    <a class="fa fa-th-list" ng-click="defineSteps(activity)" ng-class="{'text-danger': editMode.steps}" style="padding-right: 10px"> Define steps</a>
+                    <a class="fa fa-users" ng-click="assignUsers(activity)" ng-class="{'text-danger': editMode.users}" style="padding-right: 10px"> Assign users</a>
+                    <a class="fa fa-gears" ng-click="addSubActivity(activity)" style="padding-right: 10px"> Add sub-activity</a>
                 </span>
                 Activity: <input type="text" ng-model="activity.name" ng-if="isCreate" style="min-width: 500px">
             </div>
@@ -20,7 +21,18 @@
                     <div class="col-md-4" ng-if="editMode.users">
                         <div class="panel panel-default">
                             <div class="panel-heading">Users:</div>
-                            <div class="panel-body"></div>
+                            <div class="panel-body">
+                                <div class="row" ng-repeat="user in users" class="bg-default">
+                                    <div class="col-md-12" style="clear: both; border-bottom: solid; border-bottom-color: #e2e2e2; border-bottom-width: 1px; padding: 5px">
+                                        <i class="fa fa-2x fa-user pull-left" style="padding-right: 10px"></i>
+                                        <span class="pull-left">
+                                            <div>{{user.name}}</div>
+                                            <div style="font-size: 0.8em">{{user.email}}</div>
+                                        </span>
+                                        <span class="pull-right"><input type="checkbox"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -32,44 +44,11 @@
                     </div>
 
                     <div class="row col-md-{{editMode.users || editMode.steps ? 8 : 12}}">
-                        <div ng-repeat="child in activity.children" ng-click="selectActivity(child); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
-                            <div>
-                                <div>
-                                    <span>{{child.name}}</span>
-                                    <input type="text" ng-model="child.newStep" ng-if="isCreate" class=""><i ng-click="addStep(child)" class="fa fa-plus" ng-if="isCreate"></i>
-                                    <i class="fa fa-times" ng-click="remove(activity, child)"></i>
-                                </div>
-                            </div>
-                            <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
-                                <div ng-repeat="gchild in child.children" ng-click="selectActivity(gchild); $event.stopPropagation()" ng-class="{'selected': activity.selectedActivity == gchild}">
-                                    <div>
-                                        <div>
-                                            <span>{{gchild.name}}</span>
-                                            <i class="fa fa-times" ng-click="remove(child, gchild)"></i>
-                                        </div>
-                                    </div>
-                                    <div style="min-height: 200px; border: medium solid #000000; padding: 10px">
-                                        <div ng-repeat="user in gchild.children">
-                                            <div>
-                                                <span>{{user.name}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div ng-repeat="child in activity.children">
+                            <div ng-include="'html/activity.tmpl.html'"></div>
                         </div>
                     </div>
-
-
                 </div>
-
-
-
-
-                <!--<div class="row col-md-12">
-                    <input type="text" ng-model="activity.newStep" ng-if="isCreate" class="col-md-1"><i ng-click="addStep(activity)" class="fa fa-plus col-md-1" ng-if="isCreate"></i>
-                </div>-->
-
             </div>
         </div>
     </div>

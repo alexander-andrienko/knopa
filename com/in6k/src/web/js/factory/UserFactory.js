@@ -1,4 +1,15 @@
 App.factory('UserFactory', function() {
+    users = [
+        {
+            name: 'Vasya Pupkin',
+            email: 'pupkin@mail.ru'
+        },
+        {
+            name: 'Petro Ivanov',
+            email: 'ivanov@gmail.com'
+        }
+    ];
+
     function _list() {
         return [
             {
@@ -10,6 +21,6 @@ App.factory('UserFactory', function() {
         ]
     }
     return {
-        list: _list
+        list: users
     };
 });
