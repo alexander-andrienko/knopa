@@ -20,9 +20,12 @@ App.config(function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/home'});
 });
 
-App.factory('activityService', function($http) {
-    var _createActivity = function(name) {
-        return name
+App.factory('activityService', function($http, $location, $rootScope) {
+    var _createActivity = function(activity) {
+        if(!$rootScope.activities)
+            $rootScope.activities = [];
+        $rootScope.activities.push(activity);
+        $location.url('/');
     };
     var _getActivity = function(id) {
         return {

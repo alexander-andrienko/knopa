@@ -1,7 +1,4 @@
 <style type="text/css">
-    .selected {
-        background-color: green;
-    }
 </style>
 <div class="row" ng-controller="activityCtrl">
     <div class="col-md-12">
@@ -38,15 +35,10 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4" ng-if="editMode.steps">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Activity Steps: <a class="fa fa-plus-circle pull-right"> Add step</a></div>
-                            <div class="panel-body"></div>
+                    <div class="col-md-{{editMode.users || editMode.steps ? 8 : 12}}">
+                        <div ng-repeat="child in activity.children">
+                            <span ng-include="'html/activity.tmpl.html'"></span>
                         </div>
-                    </div>
-
-                    <div class="col-md-{{editMode.users || editMode.steps ? 8 : 12}}" ng-repeat="child in activity.children">
-                        <span ng-include="'html/activity.tmpl.html'"></span>
                     </div>
                 </div>
             </div>
