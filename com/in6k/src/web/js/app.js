@@ -1,4 +1,4 @@
-App = angular.module('app',['ngRoute', 'mgcrea.ngStrap', 'ngSanitize', 'ui.bootstrap']);
+App = angular.module('app',['ngRoute', 'mgcrea.ngStrap', 'ngSanitize', 'ui.bootstrap.pagination', 'ui.bootstrap.tpls', 'ui.bootstrap.modal']);
 
 App.config(function($routeProvider) {
     $routeProvider.when('/', {
