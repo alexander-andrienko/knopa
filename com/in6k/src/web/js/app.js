@@ -76,8 +76,17 @@ App.factory('activityService', function($http, $location, $rootScope) {
                     ],
                     status: 'inprogress'
                 }
+            ],
+            users: [
+                {
+                    name: 'Vasya Pupkin',
+                    email: 'pupkin@mail.ru'
+                },
+                {
+                    name: 'Petro Ivanov',
+                    email: 'ivanov@gmail.com'
+                }
             ]
-
         }
     };
     return {

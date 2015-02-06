@@ -29,7 +29,7 @@
                                             <div>{{user.name}}</div>
                                             <div style="font-size: 0.8em">{{user.email}}</div>
                                         </span>
-                                        <span class="pull-right"><input type="checkbox"></span>
+                                        <span class="pull-right"><input type="checkbox" ng-change="assignUser(user, activity)" ng-model="user.isChecked"></span>
                                     </div>
                                 </div>
                             </div>
@@ -37,6 +37,20 @@
                     </div>
 
                     <div class="col-md-{{editMode.users || editMode.steps ? 8 : 12}}">
+                        <span ng-repeat="user in activity.users">
+                            <div class="pull-left text-center alert alert-info" style="margin: 10px; width: 150px;">
+                                <div class="fa fa-5x fa-user text-muted"></div>
+                                <div>{{user.name}}</div>
+                                <div class="text-left" style="font-size: 0.8em; margin-top: 5px">
+                                    <div>
+                                        <a class="fa fa-flag-checkered" ng-click="removeUser()"> Finish activity</a>
+                                    </div>
+                                    <div>
+                                        <a class="fa fa-times-circle" ng-click="editUser()"> Reject activity</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
                         <div ng-repeat="child in activity.children">
                             <span ng-include="'html/activity.tmpl.html'"></span>
                         </div>

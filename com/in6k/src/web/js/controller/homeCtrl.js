@@ -46,4 +46,15 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
         $scope.editMode.steps = false;
         $scope.editMode.users = !$scope.editMode.users;
     }
+
+    $scope.assignUser = function(user, activity) {
+        user.isAssigned = !user.isAssigned;
+        if (!activity.users) activity.users = [];
+        if (user.isAssigned) activity.users.push(user);
+        else {
+            angular.forEach(activity.users, function(activityUser, ind) {
+                if (activityUser.name == user.name) activity.users.splice(ind,1);
+            });
+        }
+    }
 });
