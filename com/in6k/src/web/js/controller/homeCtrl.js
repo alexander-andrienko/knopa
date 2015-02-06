@@ -15,6 +15,7 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
         $scope.users = UserFactory.list;
         if (!$route.current.params.id) {
             $scope.isCreate = true;
+        if(!$scope.activity)
             $scope.activity = {
                 children: []
             }
@@ -25,8 +26,7 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
     };
 
     $scope.remove = function(parent, index) {
-        if ($scope.$parent.activity)
-            parent.children = $scope.$parent.activity.children.splice(index, 1);
+        parent.children = $scope.$parent.activity.children.splice(index, 1);
     };
 
     $scope.selectActivity = function(activity) {
@@ -40,6 +40,13 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
 
     $scope.create = function(activity) {
         activityService.createActivity(activity);
+    };
+
+    $scope.finish = function(activity) {
+        activity.isComplete = true;
+        angular.forEach(activity.children, function(child) {
+            $scope.finish(child);
+        });
     };
 
     $scope.assignUsers = function(activity) {
