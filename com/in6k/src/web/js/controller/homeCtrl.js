@@ -26,7 +26,7 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
     };
 
     $scope.remove = function(parent, index) {
-        parent.children = $scope.$parent.activity.children.splice(index, 1);
+        parent.children.splice(index, 1);
     };
 
     $scope.selectActivity = function(activity) {
