@@ -11,7 +11,6 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
         users: false
     };
 
-
     $scope.init = function() {
         $scope.users = UserFactory.list;
         if (!$route.current.params.id) {
@@ -22,13 +21,12 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
         }
         else {
             $scope.activity = activityService.getActivity($route.current.params.id);
-
         }
     };
 
     $scope.remove = function(parent, index) {
-//        parent.children = parent.children.filter(function(el) { return el == child });
-        parent.children = $scope.$parent.activity.children.splice(index,1);
+        if ($scope.$parent.activity)
+            parent.children = $scope.$parent.activity.children.splice(index, 1);
     };
 
     $scope.selectActivity = function(activity) {
@@ -36,17 +34,13 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
     };
 
     $scope.addSubActivity = function(container) {
-        /*if (!container.newStep || container.newStep.length <= 0)
-            return;
-*/
-        var step = {name: container.newStep, children: []};
+        var step = {name: '', children: []};
         container.children.push(step);
     };
 
-    $scope.defineSteps = function(activity) {
-        $scope.editMode.steps = !$scope.editMode.steps;
-        $scope.editMode.users = false;
-    }
+    $scope.create = function(activity) {
+        activityService.createActivity(activity);
+    };
 
     $scope.assignUsers = function(activity) {
         $scope.editMode.steps = false;
