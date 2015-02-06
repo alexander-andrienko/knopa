@@ -4,8 +4,6 @@
     }
 </style>
 <div class="row" ng-controller="activityCtrl">
-
-
     <div class="col-md-12">
         <div class="panel panel-default" ng-init="init()">
             <div class="panel-heading">
@@ -13,10 +11,14 @@
                     <a class="fa fa-th-list" ng-click="defineSteps(activity)" ng-class="{'text-danger': editMode.steps}" style="padding-right: 10px"> Define steps</a>
                     <a class="fa fa-users" ng-click="assignUsers(activity)" ng-class="{'text-danger': editMode.users}" style="padding-right: 10px"> Assign users</a>
                     <a class="fa fa-gears" ng-click="addSubActivity(activity)" style="padding-right: 10px"> Add sub-activity</a>
+                    <a class="fa fa-flag-checkered" ng-click="" style="padding-right: 10px"> Finish activity</a>
+                    <a class="fa fa-times-circle" ng-click="" style="padding-right: 10px"> Cancel activity</a>
                 </span>
-                Activity: <input type="text" ng-model="activity.name" ng-if="isCreate" style="min-width: 500px">
             </div>
             <div class="panel-body">
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-12">Activity: <input type="text" ng-model="activity.name" ng-if="isCreate"></div>
+                </div>
                 <div class="row">
                     <div class="col-md-4" ng-if="editMode.users">
                         <div class="panel panel-default">
@@ -43,10 +45,8 @@
                         </div>
                     </div>
 
-                    <div class="row col-md-{{editMode.users || editMode.steps ? 8 : 12}}">
-                        <div ng-repeat="child in activity.children">
-                            <div ng-include="'html/activity.tmpl.html'"></div>
-                        </div>
+                    <div class="col-md-{{editMode.users || editMode.steps ? 8 : 12}}" ng-repeat="child in activity.children">
+                        <span ng-include="'html/activity.tmpl.html'"></span>
                     </div>
                 </div>
             </div>

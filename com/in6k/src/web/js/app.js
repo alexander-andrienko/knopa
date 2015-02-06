@@ -14,7 +14,7 @@ App.config(function($routeProvider) {
         templateUrl: 'html/user.tmpl.html'
     });
     $routeProvider.when('/activity/create', {
-        controller: 'activityCtrl',
+        controller: '',
         templateUrl: 'html/activity.tmpl.html'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
