@@ -13,6 +13,10 @@
                     <a class="fa fa-times" ng-click="remove($parent.$parent.$parent.activity, $index)" style="padding-right: 10px" ng-if="$parent.activity"> Remove activity</a>
                     <a class="fa fa-check-circle-o" ng-click="create(activity)" style="padding-right: 10px" ng-if="!$parent.activity && isCreate"> Create</a>
                 </span>
+                <div class="pull-right">
+                    Completed:
+                    <span> {{completedCount(activity)}} / {{activity.users.length + activity.children.length}}</span>
+                </div>
             </div>
             <div class="panel-body">
                 <div class="row" style="margin-bottom: 20px">
@@ -55,7 +59,7 @@
                                 <div>{{user.name}}</div>
                                 <div class="text-left" style="font-size: 0.8em; margin-top: 5px">
                                     <div>
-                                        <a class="fa fa-flag-checkered" ng-click="removeUser()"> Finish activity</a>
+                                        <a class="fa fa-flag-checkered" ng-click="userComplete(activity, user)"> Finish activity</a>
                                     </div>
                                     <div>
                                         <a class="fa fa-times-circle" ng-click="editUser()"> Reject activity</a>

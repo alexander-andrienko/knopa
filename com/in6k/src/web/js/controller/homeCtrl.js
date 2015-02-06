@@ -20,6 +20,7 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
             $scope.isCreate = true;
         if(!$scope.activity)
             $scope.activity = {
+                users: [],
                 children: [],
                 usersTmpl: angular.copy(UserFactory.list)
             }
@@ -41,6 +42,7 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
         var step = {
             name: '',
             children: [],
+            users: [],
             usersTmpl: angular.copy(UserFactory.list),
             status: Constants.Status.NOT_STARTED,
             createdAt: new Date().getTime(),
@@ -62,12 +64,46 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
         angular.forEach(activity.children, function(child) {
             $scope.finish(child);
         });
+        $scope.refreshCompletion($scope.activity);
+    };
+
+    $scope.userComplete = function(activity, user) {
+        user.isComplete = true;
+        $scope.refreshCompletion($scope.activity);
+    };
+
+    $scope.refreshCompletion = function(activity) {
+        activity.children.forEach(function(child) {
+            $scope.refreshCompletion(child);
+        });
+        var count = 0;
+        count += activity.users.filter(function(user) {
+            return user.isComplete == true;
+        }).length;
+        count += activity.children.filter(function(child) {
+            return child.isComplete == true;
+        }).length;
+        var totalCount = activity.users.length + activity.children.length;
+        if (!activity.isComplete)
+            activity.isComplete = count == (activity.users.length + activity.children.length);
+
+    };
+
+    $scope.completedCount = function(activity) {
+        var count = 0;
+        count += activity.users.filter(function(user) {
+            return user.isComplete == true;
+        }).length;
+        count += activity.children.filter(function(child) {
+            return child.isComplete == true;
+        }).length;
+        return count;
     };
 
     $scope.assignUsers = function(activity) {
         activity.editMode = activity.editMode || {users: false};
         activity.editMode.users = !$scope.editMode.users;
-    }
+    };
 
     $scope.assignUser = function(user, activity) {
         user.isAssigned = !user.isAssigned;
