@@ -30,7 +30,7 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="activity in activities">
-                                <td><a href="#/activity/dashboard/{{activity.id}}">{{activity.name}}</a></td>
+                                <td><a href="#/activity/dashboard/{{$index}}">{{activity.name}}</a></td>
                                 <td><span class="label" ng-class="getStatusLabel(activity.status)">{{activity.status.name}}</span></td>
                                 <td><span>Created by {{activity.createdBy}} at {{activity.createdAt | date:'medium'}}</span></td>
                             </tr>

@@ -38,7 +38,7 @@ App.factory('activityService', function($http, $location, $rootScope) {
         $location.url('/');
     };
     var _getActivity = function(id) {
-        return $rootScope.activities[0];
+        return $rootScope.activities[id];
     };
     return {
         createActivity: _createActivity,

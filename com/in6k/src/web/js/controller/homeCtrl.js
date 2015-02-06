@@ -26,7 +26,7 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
             }
         }
         else {
-            $scope.activity = activityService.getActivity($route.current.params.id);
+            $scope.activity = activityService.getActivity(parseInt($route.current.params.activityId));
         }
     };
 
