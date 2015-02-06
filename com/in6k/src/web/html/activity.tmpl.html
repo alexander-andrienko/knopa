@@ -56,7 +56,7 @@
                             <div class="pull-left text-center alert alert-info" style="margin: 10px; width: 150px;">
                                 <div class="fa fa-5x fa-user text-muted"></div>
                                 <div>{{user.name}}</div>
-                                <div class="text-left" style="font-size: 0.8em; margin-top: 5px" ng-if="!user.isComplete">
+                                <div class="text-left" style="font-size: 0.8em; margin-top: 5px" ng-if="!user.isComplete && !isCreate">
                                     <div>
                                         <a class="fa fa-flag-checkered" ng-click="userComplete(activity, user)"> Finish activity</a>
                                     </div>
@@ -67,7 +67,6 @@
                             </div>
                         </span>
                         <div ng-repeat="pActivity in activity.children" ng-include="'html/activity.tmpl.html'" ng-init="activity = pActivity">
-                            <!--<span ng-include="'html/activity.tmpl.html'"></span>-->
                         </div>
                     </div>
                 </div>

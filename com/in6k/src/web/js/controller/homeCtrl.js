@@ -52,6 +52,10 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
     };
 
     $scope.create = function(activity) {
+        if (!activity.name || activity.name.length <= 0) {
+            alert("activity name required");
+            return;
+        }
         activity.id =  angular.isDefined($rootScope.activities) ? $rootScope.activities[$rootScope.activities.length-1].id + 1 : 1;
         activity.status = Constants.Status.NOT_STARTED;
         activity.createdAt = new Date().getTime();
