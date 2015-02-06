@@ -102,8 +102,8 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
 
     $scope.assignUsers = function(activity) {
         activity.editMode = activity.editMode || {users: false};
-        activity.editMode.users = !$scope.editMode.users;
-    };
+        activity.editMode.users = !activity.editMode.users;
+    }
 
     $scope.assignUser = function(user, activity) {
         user.isAssigned = !user.isAssigned;
