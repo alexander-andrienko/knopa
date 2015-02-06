@@ -18,8 +18,8 @@ App.config(function($routeProvider) {
         templateUrl: 'html/activity.tmpl.html'
     });
     $routeProvider.when('/activity/dashboard/:activityId', {
-        controller: 'ActivityDashboardCtrl',
-        templateUrl: 'html/activity.dashboard.tmpl.html'
+        controller: 'activityCtrl',
+        templateUrl: 'html/activity.tmpl.html'
     });
     $routeProvider.otherwise({redirectTo: '/home'});
 });
@@ -38,66 +38,7 @@ App.factory('activityService', function($http, $location, $rootScope) {
         $location.url('/');
     };
     var _getActivity = function(id) {
-        return {
-            name: 'Belka',
-            status: 'inprogress',
-            children: [
-                {
-                    name: 'blue room',
-                    children: [
-                        {
-                            name: 'Mykolay',
-                            isComplete: true
-                        },
-                        {
-                            name: 'Alexey',
-                            isComplete: true
-                        },
-                        {
-                            name: 'Alexandr',
-                            isComplete: true
-                        },
-                        {
-                            name: 'Oleksandr',
-                            isComplete: true
-                        }
-                    ],
-                    status: 'complete'
-                },
-                {
-                    name: 'yellow room',
-                    children: [
-                        {
-                            name: 'Mykolay',
-                            isComplete: true
-                        },
-                        {
-                            name: 'Alexey',
-                            isComplete: true
-                        },
-                        {
-                            name: 'Alexandr',
-                            isComplete: false
-                        },
-                        {
-                            name: 'Oleksandr',
-                            isComplete: false
-                        }
-                    ],
-                    status: 'inprogress'
-                }
-            ],
-            users: [
-                {
-                    name: 'Vasya Pupkin',
-                    email: 'pupkin@mail.ru'
-                },
-                {
-                    name: 'Petro Ivanov',
-                    email: 'ivanov@gmail.com'
-                }
-            ]
-        }
+        return $rootScope.activities[0];
     };
     return {
         createActivity: _createActivity,

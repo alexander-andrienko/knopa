@@ -16,7 +16,7 @@ App.controller('activityCtrl', function($scope, $route, $rootScope, activityServ
     };
 
     $scope.init = function() {
-        if (!$route.current.params.id) {
+        if (!$route.current.params.activityId) {
             $scope.isCreate = true;
         if(!$scope.activity)
             $scope.activity = {
