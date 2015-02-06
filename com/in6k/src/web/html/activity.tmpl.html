@@ -5,7 +5,7 @@
         <div class="panel panel-default" ng-init="init()" ng-class="activity.isComplete? 'panel-success' : 'panel-default'">
             <div class="panel-heading">
                 <span style="padding-right: 10px">
-                    <a class="fa fa-users" ng-click="assignUsers(activity)" ng-class="{'text-danger': editMode.users}" style="padding-right: 10px"> Assign users</a>
+                    <a class="fa fa-users" ng-click="assignUsers(activity)" ng-class="{'text-danger': activity.editMode.users}" style="padding-right: 10px"> Assign users</a>
                     <a class="fa fa-gears" ng-click="addSubActivity(activity)" style="padding-right: 10px"> Add sub-activity</a>
                     <a class="fa fa-flag-checkered" ng-click="finish(activity)" style="padding-right: 10px" ng-if="!isCreate"> Finish activity</a>
                     <a class="fa fa-flag-checkered" ng-click="finish(activity)" style="padding-right: 10px" > Finish activity</a>
@@ -19,11 +19,11 @@
                     <div class="col-md-12">Activity: <input type="text" ng-model="activity.name" ng-if="isCreate"></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4" ng-if="editMode.users">
+                    <div class="col-md-4" ng-if="activity.editMode.users">
                         <div class="panel panel-default">
                             <div class="panel-heading">Users:</div>
                             <div class="panel-body">
-                                <div class="row" ng-repeat="user in users" class="bg-default">
+                                <div class="row" ng-repeat="user in activity.usersTmpl" class="bg-default">
                                     <div class="col-md-12" style="clear: both; border-bottom: solid; border-bottom-color: #e2e2e2; border-bottom-width: 1px; padding: 5px">
                                         <i class="fa fa-2x fa-user pull-left" style="padding-right: 10px"></i>
                                         <span class="pull-left">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-{{editMode.users || editMode.steps ? 8 : 12}}">
+                    <div class="col-md-{{activity.editMode.users ? 8 : 12}}">
                         <span ng-repeat="user in activity.users">
                             <div class="pull-left text-center alert alert-info" style="margin: 10px; width: 150px;">
                                 <div class="fa fa-5x fa-user text-muted"></div>
