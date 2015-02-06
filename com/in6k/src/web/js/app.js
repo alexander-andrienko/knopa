@@ -1,4 +1,4 @@
-App = angular.module('app',['ngRoute', 'mgcrea.ngStrap', 'ngSanitize']);
+App = angular.module('app',['ngRoute', 'mgcrea.ngStrap', 'ngSanitize', 'ui.bootstrap.pagination', 'ui.bootstrap.tpls']);
 
 App.config(function($routeProvider) {
     $routeProvider.when('/', {
@@ -17,7 +17,17 @@ App.config(function($routeProvider) {
         controller: 'activityCtrl',
         templateUrl: 'html/activity.tmpl.html'
     });
+    $routeProvider.when('/activity/dashboard/:activityId', {
+        controller: 'ActivityDashboardCtrl',
+        templateUrl: 'html/activity.dashboard.tmpl.html'
+    });
     $routeProvider.otherwise({redirectTo: '/home'});
+});
+
+App.filter("pagingFilter", function(){
+    return function(input, currentPage, pageSize ){
+        return input ? input.slice(currentPage * pageSize, currentPage * ( pageSize + 1 )) : [];
+    };
 });
 
 App.factory('activityService', function($http, $location, $rootScope) {

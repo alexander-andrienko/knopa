@@ -1,3 +1,60 @@
-<div>
-    <button ng-click="createActivity()" class="btn btn-primary">Create</button>
+<style type="text/css">
+</style>
+<div class="col-md-12" ng-init="init()">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Activities</div>
+        </div>
+        <div class="panel-body">
+            <div ng-init="init()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <colgroup>
+                                <col class="col-lg-4">
+                                <col class="col-lg-4">
+                                <col class="col-lg-4">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Modified
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="activity in activities">
+                                <td><a href="#/activity/dashboard/{{activity.id}}">{{activity.name}}</a></td>
+                                <td><span class="label" ng-class="getStatusLabel(activity.status)">{{activity.status.name}}</span></td>
+                                <td><span>Created by {{activity.createdBy}} at {{activity.createdAt | date:'medium'}}</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="text-center" ng-if="activities.length == 0">No Data Available</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <pagination total-items="activities.length"
+                                ng-model="paging.currentPage"
+                                items-per-page="paging.pageSize"
+                                max-size="2"
+                                rotate="false"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;"
+                                boundary-links="true"
+                                first-text="&laquo;"
+                                last-text="&raquo;">
+                    </pagination>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

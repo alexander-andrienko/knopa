@@ -1,0 +1,17 @@
+<div class="col-md-12" ng-init="init()">
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: center;"><h4>{{activity.name}}</h4></div>
+                <div class="panel-body">
+                    <div ng-repeat="activity in activity.children" style="margin: 5px 0;">
+                        <a class="btn btn-block" ng-class="getStatusButtonStyle(activity.status)" href="#/activity/dashboard/{{activity.id}}" style="text-decoration: none; border: 1px solid #dddddd;">
+                            <h4>{{ activity.name }}</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,15 @@
-App.controller('homeCtrl', function($scope, activityService, $location) {
-    $scope.createActivity = function() {
-        $location.url("/activity/create")
-    }
+App.controller('homeCtrl', function($scope, $rootScope) {
+    $scope.init = function() {
+        $scope.activities = $rootScope.activities;
+    };
 
+    $scope.getStatusLabel = function(status) {
+        var status = Constants.Status.getStatusById(status.id);
+        return status.label;
+    }
 });
 
-App.controller('activityCtrl', function($scope, $route, activityService, UserFactory) {
+App.controller('activityCtrl', function($scope, $route, $rootScope, activityService, UserFactory) {
     $scope.editMode = {
         steps: false,
         users: false
@@ -34,11 +38,15 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
     };
 
     $scope.addSubActivity = function(container) {
-        var step = {name: '', children: []};
+        var step = {name: '', children: [], status: Constants.Status.NOT_STARTED, createdAt: new Date().getTime(), createdBy: 'Knopa Administrator'};
         container.children.push(step);
     };
 
     $scope.create = function(activity) {
+        activity.id =  angular.isDefined($rootScope.activities) ? $rootScope.activities[$rootScope.activities.length-1].id + 1 : 1;
+        activity.status = Constants.Status.NOT_STARTED;
+        activity.createdAt = new Date().getTime();
+        activity.createdBy = 'Knopa Administrator';
         activityService.createActivity(activity);
     };
 
@@ -52,7 +60,7 @@ App.controller('activityCtrl', function($scope, $route, activityService, UserFac
     $scope.assignUsers = function(activity) {
         $scope.editMode.steps = false;
         $scope.editMode.users = !$scope.editMode.users;
-    }
+    };
 
     $scope.assignUser = function(user, activity) {
         user.isAssigned = !user.isAssigned;
