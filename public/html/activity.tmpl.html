@@ -1,0 +1,76 @@
+<style type="text/css">
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default" ng-init="init()" ng-class="activity.isComplete? 'panel-success' : 'panel-default'">
+            <div class="panel-heading">
+                <span style="padding-right: 10px">
+                    <a class="fa fa-users" ng-click="assignUsers(activity)" ng-class="{'text-danger': activity.editMode.users}" style="padding-right: 10px" ng-if="isCreate"> Assign users</a>
+                    <a class="fa fa-gears" ng-click="addSubActivity(activity)" style="padding-right: 10px" ng-if="isCreate"> Add sub-activity</a>
+                    <a class="fa fa-flag-checkered" ng-click="finish(activity)" style="padding-right: 10px" ng-if="!isCreate"> Finish activity</a>
+                    <a class="fa fa-times-circle" ng-click="" style="padding-right: 10px" ng-if="!isCreate"> Cancel activity</a>
+                    <a class="fa fa-times" ng-click="remove($parent.$parent.$parent.activity, $index)" style="padding-right: 10px" ng-if="$parent.activity" ng-if="isCreate"> Remove activity</a>
+                    <a class="fa fa-check-circle-o" ng-click="create(activity)" style="padding-right: 10px" ng-if="!$parent.activity && isCreate"> Create</a>
+                </span>
+                <div class="pull-right">
+                    Completed:
+                    <span> {{completedCount(activity)}} / {{activity.users.length + activity.children.length}}</span>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-2">Activity: <input type="text" ng-model="activity.name" ng-disabled="!isCreate"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label pull-left" style="margin-right: 5px"><i class="fa fa-calendar"></i> Start date</label>
+                            <div class="form-group pull-left" style="margin-right: 5px">
+                              <input size="10" class="" ng-model="activity.startAt" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
+                            </div>
+                            <div class="form-group" style="margin-right: 5px">
+                              <input size="8" class="" ng-model="activity.startAt" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" ng-if="activity.editMode.users">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Users:</div>
+                            <div class="panel-body">
+                                <div class="row" ng-repeat="user in activity.usersTmpl" class="bg-default">
+                                    <div class="col-md-12" style="clear: both; border-bottom: solid; border-bottom-color: #e2e2e2; border-bottom-width: 1px; padding: 5px">
+                                        <i class="fa fa-2x fa-user pull-left" style="padding-right: 10px"></i>
+                                        <span class="pull-left">
+                                            <div>{{user.name}}</div>
+                                            <div style="font-size: 0.8em">{{user.email}}</div>
+                                        </span>
+                                        <span class="pull-right"><input type="checkbox" ng-change="assignUser(user, activity)" ng-model="user.isChecked"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-{{activity.editMode.users ? 8 : 12}}">
+                        <span ng-repeat="user in activity.users">
+                            <div class="pull-left text-center alert alert-info" style="margin: 10px; width: 150px;">
+                                <div class="fa fa-5x fa-user text-muted"></div>
+                                <div>{{user.name}}</div>
+                                <div class="text-left" style="font-size: 0.8em; margin-top: 5px" ng-if="!user.isComplete && !isCreate">
+                                    <div>
+                                        <a class="fa fa-flag-checkered" ng-click="userComplete(activity, user)"> Finish activity</a>
+                                    </div>
+                                    <div>
+                                        <a class="fa fa-times-circle" ng-click="editUser()"> Reject activity</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                        <div ng-repeat="pActivity in activity.children" ng-include="'html/activity.tmpl.html'" ng-init="activity = pActivity">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
